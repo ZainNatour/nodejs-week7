@@ -1,15 +1,19 @@
-const mysql = require("mysql2");
-
-const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "root123",
-  database: "nodejs_week7",
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var mysql2_1 = require("mysql2");
+var dbConfig = {
+    host: "localhost",
+    user: "root",
+    password: "root123",
+    database: "nodejs_week7",
+};
+var db = mysql2_1.default.createConnection(dbConfig);
+db.connect(function (err) {
+    if (err) {
+        console.error(err, "failed to connect+++++++++++++++++++++++++++");
+    }
+    else {
+        console.log("connected+++++++++++++++++++++++++++++++++++");
+    }
 });
-
-db.connect((err) => {
-  if (err) console.log(err, "failed to connect+++++++++++++++++++++++++++");
-  console.log("connected+++++++++++++++++++++++++++++++++++");
-});
-
-module.exports = db;
+exports.default = db;

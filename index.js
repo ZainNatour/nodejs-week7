@@ -1,8 +1,16 @@
-const express = require("express");
-const path = require("path");
-const booksRouter = require("./routes/books");
-const { sequelize } = require("./models/books");
-const db = require("./databaseConfig/connection");
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var express = require("express");
+var books_1 = require("./routes/books"); // Ensure proper import
+var app = express();
+app.use(express.json());
+app.use("/books", books_1.default);
+app.use("/", function (req, res) {
+    res.send("root page, go to the books path");
+});
+app.listen(3000, "localhost", function () {
+    console.log("Server is running");
+});
 // sequelize
 //   .sync()
 //   .then(() => {
@@ -11,17 +19,3 @@ const db = require("./databaseConfig/connection");
 //   .catch((error) => {
 //     console.error("Error creating database and tables:", error);
 //   });
-
-const app = express();
-app.use(express.json());
-// app.set("viee engine", "pug");
-// app.set("views", path.join(__dirname, "templates"));
-
-app.use("/books", booksRouter);
-app.use("/", (req, res) => {
-  res.send("root page, go the books path");
-});
-
-app.listen(3000, "localhost", () => {
-  console.log("server is running");
-});
